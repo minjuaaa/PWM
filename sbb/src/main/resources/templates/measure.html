@@ -1,0 +1,119 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+<head>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+
+if(!navigator.geolocation)
+    alert("지원하지 않음");
+else {
+    var options = { // watchPosition()의 마지막 매개 변수로 전달
+        enableHighAccuracy: false,
+        timeout: 5000,
+        maximumAge: 0 };
+    var img = new Image();
+    var count=0;
+    var watchID;
+ 
+    // changed() 콜백 함수를 등록하고, 반복 위치 서비스 시작
+    watchID = navigator.geolocation.watchPosition(changed, null, options);
+}
+
+
+
+var lat;
+var lon;
+ 
+//위치가 바뀌면 changed()가 호출되고, 위치 정보가 들어 있는 position 객체가 매개 변수로 넘어온다.
+function changed(position) {
+    if(count == 5) { // clearWatch() 테스트를 위해 5번만 서비스
+        navigator.geolocation.clearWatch(watchID); // 반복 서비스 종료
+        document.getElementById("msg").innerHTML = "위치 서비스 종료";
+        return;
+    }
+    lat = position.coords.latitude; // 변경된 위도
+    lon = position.coords.longitude // 변경된 경도
+    var text = count + ": (위도 " + lat + "°, 경도 " + lon + "°)로 변경됨<br>";
+    var lat_txt = "위도:" + lat;
+    document.getElementById("msg").innerHTML = text; // 위치 정보 출력
+    document.getElementById("html_lat").innerHTML = lat_txt;
+    
+    
+    
+    
+    
+
+}
+
+
+
+
+
+
+
+
+
+</script >
+
+
+<h1>측정중...</h1>
+
+
+
+
+<div id="msg">이곳에  위치 정보 출력</div>
+<div id="html_lat">lat</div>
+
+
+
+    <form th:action="@{/map/endmeasure}" th:object="${mapForm}" method="post" id="map_form">
+    
+    	<div th:replace="form_errors :: formErrorsFragment"></div>
+        <div class="mb-3">
+            <label for="latitude" class="form-label">위도</label>
+            <input type="text" name="latitude" id="latitude" class="form-control"/>
+        </div>
+        
+        <div class="mb-3">
+            <label for="longtitude" class="form-label">경도</label>
+            <input type="text" name="longtitude" id="longtitude" class="form-control"/>
+        </div>
+        
+        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+        
+        <button type="submit" th:href="@{/map/endmeasure}" class="btn btn-primary btn-xl">종료</button>
+
+
+
+        
+    </form>	
+    
+    
+    
+<div style="margin: 100px">
+    <h1 id="stopwatch">
+        00:00:00
+    </h1>
+    <div>
+        <button onclick="startClock()">start</button>
+        <button onclick="stopClock()">stop</button>
+        <button onclick="resetClock()">reset</button>
+    </div>
+</div>
+<script th:src="@{/stopwatch.js}" type="text/javascript"></script>
+
+
+
+
+
+
+</body>
+
+
+
+</div>
+</html>
