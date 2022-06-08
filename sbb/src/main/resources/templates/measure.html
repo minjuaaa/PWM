@@ -41,20 +41,17 @@ function changed(position) {
     var lat_txt = "위도:" + lat;
     document.getElementById("msg").innerHTML = text; // 위치 정보 출력
     document.getElementById("html_lat").innerHTML = lat_txt;
+    const lat0 = lat;
+    const lon0 = lon;
     
-    
+    document.getElementById("latitude").value = lat0;
+    document.getElementById("longtitude").value = lon0;
+
     
     
     
 
 }
-
-
-
-
-
-
-
 
 
 </script >
@@ -85,14 +82,18 @@ function changed(position) {
         
         <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
         
+    
+        
         <button type="submit" th:href="@{/map/endmeasure}" class="btn btn-primary btn-xl">종료</button>
 
 
 
         
     </form>	
-    
-    
+  
+  
+
+
     
 <div style="margin: 100px">
     <h1 id="stopwatch">
