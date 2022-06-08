@@ -57,16 +57,12 @@ public class MapController {
     
     
     @GetMapping("/endmeasure")	//새글쓰기 버튼인듯.... ㅅㅂ 이거 누르면 질문 폼 나옴 근데 이건 get방식으로 처리되는 일들
-    public String endMeasureG () { //questionCreate 메서드에 매개변수로 QuestionForm 객체를 추가. 이렇게 하면 이제 GET 방식에서도 question_form 템플릿에 QuestionForm 객체가 전달
+    public String endMeasure () { //questionCreate 메서드에 매개변수로 QuestionForm 객체를 추가. 이렇게 하면 이제 GET 방식에서도 question_form 템플릿에 QuestionForm 객체가 전달
         return "end_measure";
     }
     
     
-    @PostMapping("/endmeasure")	//새글쓰기 버튼인듯.... ㅅㅂ 이거 누르면 질문 폼 나옴 근데 이건 get방식으로 처리되는 일들
-    public String endMeasureP () { //questionCreate 메서드에 매개변수로 QuestionForm 객체를 추가. 이렇게 하면 이제 GET 방식에서도 question_form 템플릿에 QuestionForm 객체가 전달
-        return "end_measure";
-    }
-    
+
     
 
 }

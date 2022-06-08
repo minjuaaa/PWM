@@ -220,6 +220,7 @@ function drawPolyline(lines) {
     
     var arrPath = polyline.getPath();
     document.getElementById("msg").innerHTML = arrPath;
+    document.getElementById("arrCoord").value = arrPath;
     }
 }
 
@@ -244,6 +245,23 @@ function pointsToPath(points) {
 
 
 </script>
+
+
+
+    <form th:action="@{/map/endmeasure}" th:object="${coordForm}" method="post" id="coord_form">
+    
+        <div class="mb-3">
+            <label for="arrCoord" class="form-label">좌표배열</label>
+            <input type="text" name="arrCoord" id="arrCoord" class="form-control"/>
+        </div>
+  
+        <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }">
+          
+        <button type="submit" class="btn btn-primary btn-xl">종료</button>
+
+        
+    </form >	
+
 
 
 <div id="msg">이곳에  위치 정보 출력</div>
