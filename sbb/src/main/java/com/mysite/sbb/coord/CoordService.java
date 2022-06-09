@@ -21,7 +21,7 @@ public class CoordService {
     private final CoordRepository coordRepository;
 	
 
-    public List<Coord> getlist() {	//질문 목록을 조회하여 리턴하는 getList 메서드 
+    public List<Coord> getList() {	//질문 목록을 조회하여 리턴하는 getList 메서드 
         return this.coordRepository.findAll();
     }
 	

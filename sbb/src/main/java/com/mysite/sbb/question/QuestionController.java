@@ -1,17 +1,27 @@
 package com.mysite.sbb.question;
 
-import com.mysite.sbb.user.SiteUser;
-import com.mysite.sbb.user.UserService;
-import lombok.RequiredArgsConstructor;
+import java.security.Principal;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
-import java.security.Principal;
+import com.mysite.sbb.coord.Coord;
+import com.mysite.sbb.coord.CoordService;
+import com.mysite.sbb.user.SiteUser;
+import com.mysite.sbb.user.UserService;
+
+import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/question")
 @RequiredArgsConstructor
@@ -20,11 +30,17 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final UserService userService;
+    private final CoordService coordService;
 
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+    public String list(Model model, Model modelc, @RequestParam(value="page", defaultValue="0") int page) {
         Page<Question> paging = this.questionService.getList(page);
+        List<Coord> clist = this.coordService.getList();
+      
         model.addAttribute("paging", paging);
+        modelc.addAttribute("clist", clist);
+        
+        
         return "question_list";
     }
 

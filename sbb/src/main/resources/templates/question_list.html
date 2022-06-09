@@ -59,8 +59,33 @@
 	
 	<div id="msg">이곳에  위치 정보 출력</div>
 	<div id="html_lat">lat</div>
-	
 	<a th:href="@{/map/measure}" class="btn btn-primary">활동시작</a>
+	
+	
+	
+	 <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>제목</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="coord, loop : ${clist}">
+               
+                <td>
+                    <a th:text="${coord.arrCoord}"></a>
+                </td>
+                <td th:text="${#temporals.format(coord.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            </tr>  <!--날짜객체를 날짜포맷에 맞게 변환한다.-->
+        </tbody>
+    </table>
+	
+	
+
+
+
+
 	
 	<head>
         <meta charset="utf-8" />

@@ -60,6 +60,10 @@ function displayMarker(locPosition, message) {
 }    
 
 
+
+
+
+
 // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
 var linePath = [
     new kakao.maps.LatLng(37.474010, 127.134422),
